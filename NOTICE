@@ -1,0 +1,35 @@
+OmaClip Clipboard Sync
+
+The Omarchy panel composition and ADB discovery parsing are adapted/informed
+by Android Mirror, Copyright (c) 2026 Ayan De, MIT License.
+https://github.com/ayandexyz/omarchy-android-mirror
+Inspected commit: a74f3d94eef6889f22793a75083e7492088b20eb
+Android Mirror is provided under the MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+No Android Mirror runtime code or installation is required.
+
+OmaClip uses the separately installed scrcpy 4.1 server from Genymobile/scrcpy,
+Copyright (C) 2018 Genymobile and subsequent contributors, Apache License 2.0.
+https://github.com/Genymobile/scrcpy/tree/v4.1
+Our Rust protocol subset is independently implemented from its wire layouts.
+No scrcpy binaries or source files are distributed with OmaClip.
+
+The native Wayland implementation is independently written against the
+MIT-licensed protocol specifications; no wl-clipboard source is incorporated.

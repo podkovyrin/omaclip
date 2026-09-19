@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Compatibility entry point; QML launches the Rust executable directly.
+exec "$(dirname "$0")/omaclip-rs" "$@"

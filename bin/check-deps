@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+missing=()
+for package in scrcpy android-tools avahi qrencode; do
+  pacman -Q "$package" >/dev/null 2>&1 || missing+=("$package")
+done
+if ((${#missing[@]})); then
+  printf 'Missing packages. Run: omarchy pkg add'
+  printf ' %s' "${missing[@]}"
+  printf '\n'
+  exit 1
+fi
+root=$(cd "$(dirname "$0")/.." && pwd)
+if [[ ! -x "$root/bin/omaclip-rs" ]]; then
+  echo 'Build OmaClip first: ./bin/build' >&2
+  exit 1
+fi
+"$root/bin/omaclip-rs" --verify-server
+if ! systemctl is-active --quiet avahi-daemon; then
+  echo 'Wi-Fi discovery needs Avahi. Run: sudo systemctl enable --now avahi-daemon' >&2
+  exit 1
+fi
+printf 'All runtime dependencies are ready.\n'

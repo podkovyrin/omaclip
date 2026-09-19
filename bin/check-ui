@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project=$(cd "$(dirname "$0")/.." && pwd)
+check_dir=$(mktemp -d)
+trap 'rm -rf "$check_dir"' EXIT
+ln -s /usr/share/omarchy/shell/Commons "$check_dir/Commons"
+ln -s /usr/share/omarchy/shell/Ui "$check_dir/Ui"
+cp "$project/ClipboardView.qml" "$check_dir/ClipboardView.qml"
+sed 's|import ".." as Plugin|import "." as Plugin|' "$project/tests/tst_panel.qml" > "$check_dir/shell.qml"
+mkdir -p /tmp/omaclip-ui-check
+QT_QPA_PLATFORM=offscreen timeout 20 quickshell -p "$check_dir" --no-color > "$check_dir/result" 2>&1
+cat "$check_dir/result"
+! grep -qE 'FAIL|ERROR|Unable to assign' "$check_dir/result"
+[[ $(grep -c 'PASS test_' "$check_dir/result") -eq 4 ]]
