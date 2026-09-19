@@ -1,7 +1,10 @@
 # OmaClip
 
-Share text between Omarchy and one Android phone, over USB or Wi-Fi.
-No mirroring window, video, or audio. Keyboard-first controls in the bar.
+OmaClip provides a seamless, reliable shared clipboard between Omarchy and one
+Android phone over USB or Wi-Fi. No mirroring window, video, or audio—just
+keyboard-first clipboard controls in the bar.
+
+![OmaClip panel showing active Wi-Fi clipboard sync](assets/omaclip-panel.png)
 
 ## Install
 
@@ -18,6 +21,30 @@ omarchy plugin add https://github.com/podkovyrin/omaclip.git --enable
 The repository includes a prebuilt x86-64 native executable, so a normal install
 does not require Rust or a compiler. `omarchy plugin update
 local.omaclip.clipboard-sync` updates the executable together with the plugin.
+
+## Android setup
+
+No Android app is required. First enable **Developer options** on the phone: open
+**Settings → About phone** and tap **Build number** seven times. The exact menu
+names can vary by manufacturer.
+
+For USB:
+
+1. In **Developer options**, turn on **USB debugging**.
+2. Connect the unlocked phone to the computer with a data-capable USB cable.
+3. Accept the **Allow USB debugging** prompt on the phone.
+4. Select the phone in OmaClip and resume sync.
+
+For Wi-Fi (Android 11 or newer):
+
+1. Put the phone and computer on the same local network.
+2. Open **Developer options → Wireless debugging** and turn it on.
+3. In OmaClip, choose **Add phone → Show QR code**.
+4. On Android, choose **Pair device with QR code** and scan the code within two
+   minutes.
+5. Select the phone in OmaClip and resume sync. If it does not connect
+   automatically, enter the main **IP address & port** shown on Android's
+   **Wireless debugging** screen—not the temporary pairing port.
 
 ## Requirements
 
