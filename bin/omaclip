@@ -1,3 +1,8 @@
 #!/usr/bin/env sh
-# Compatibility entry point; QML launches the Rust executable directly.
-exec "$(dirname "$0")/omaclip-rs" "$@"
+# Stable entry point for the locally built backend.
+backend="$(dirname "$0")/omaclip-rs"
+if [ ! -x "$backend" ]; then
+  printf '%s\n' '{"state":"error","message":"Build OmaClip first: ~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/build","devices":[],"enabled":false,"selected":"","qrImage":"","qrActive":false}'
+  exit 1
+fi
+exec "$backend" "$@"

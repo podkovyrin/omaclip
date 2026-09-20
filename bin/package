@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Produce a self-contained OmaClip plugin archive, without system dependencies.
+# Produce a source-only OmaClip plugin archive for local compilation.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-./bin/build
 omarchy plugin validate .
 version=$(python3 -c 'import json; print(json.load(open("manifest.json"))["version"])')
 mkdir -p dist
-archive="dist/omaclip-${version}-$(uname -m).tar.gz"
+archive="dist/omaclip-${version}-source.tar.gz"
 tar -czf "$archive" manifest.json Panel.qml ClipboardView.qml BridgeBackend.qml Service.qml \
-  README.md LICENSE NOTICE CHANGELOG.md bin/omaclip bin/omaclip-rs bin/check-deps
+  README.md LICENSE NOTICE CHANGELOG.md Cargo.toml Cargo.lock src tests \
+  bin/omaclip bin/build bin/package bin/check-deps bin/check-ui .gitignore
 (cd dist && sha256sum "$(basename "$archive")" > "$(basename "$archive").sha256")
 printf 'Created %s\n' "$archive"

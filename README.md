@@ -8,19 +8,37 @@ keyboard-first clipboard controls in the bar.
 
 ## Install
 
-Install the runtime dependencies, enable Wi-Fi discovery, then add and enable
-OmaClip:
+Install the build and runtime dependencies, enable Wi-Fi discovery, then add,
+build, and enable OmaClip:
 
 ```sh
-omarchy pkg add scrcpy android-tools avahi qrencode
+omarchy pkg add rust base-devel scrcpy android-tools avahi qrencode
 sudo systemctl enable --now avahi-daemon
-omarchy plugin add https://github.com/podkovyrin/omaclip.git --enable
+omarchy plugin add https://github.com/podkovyrin/omaclip.git
+# Answer No if prompted to enable now; build first.
+~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/build
 ~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/check-deps
+omarchy plugin enable local.omaclip.clipboard-sync
 ```
 
-The repository includes a prebuilt x86-64 native executable, so a normal install
-does not require Rust or a compiler. `omarchy plugin update
-local.omaclip.clipboard-sync` updates the executable together with the plugin.
+The repository contains source only. `bin/build` compiles the backend on your
+machine using the dependency versions in `Cargo.lock`; Cargo downloads those
+dependencies on the first build. If you already have Rust 1.88+ and a C toolchain,
+you can omit `rust base-devel` from the package command above.
+
+Rebuild after every plugin update. Disable first so the UI and backend stay on
+the same version:
+
+```sh
+omarchy plugin disable local.omaclip.clipboard-sync
+omarchy plugin update local.omaclip.clipboard-sync
+~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/build
+~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/check-deps
+omarchy plugin enable local.omaclip.clipboard-sync
+```
+
+Only enable after the build and checks succeed. The executable is a local,
+ignored build output; plugin updates do not rebuild it automatically.
 
 ## Android setup
 
@@ -53,7 +71,7 @@ For Wi-Fi (Android 11 or newer):
 - A Wayland session with `wlr-data-control` (Omarchy's Hyprland provides it).
 - **scrcpy 4.1**, `android-tools`, `avahi`, and `qrencode`.
 - Android with USB debugging enabled; Android 11+ for Wi-Fi pairing.
-- Rust 1.88+ and a C toolchain only when building from source.
+- Rust 1.88+ and a C toolchain for installation and updates.
 
 Runtime dependencies and Wi-Fi discovery can be prepared separately with:
 
@@ -79,13 +97,14 @@ From the source directory:
 ./bin/package
 ```
 
-The release archive in `dist/` contains the same prebuilt native executable, UI,
-documentation, and dependency checker. It is specific to the architecture on
-which it was built.
+The `dist/omaclip-<version>-source.tar.gz` release archive contains the Rust source,
+lockfile, build script, UI, documentation, and dependency checker. It contains no
+prebuilt executable. `bin/package` does not require compilation.
 To install a release archive, extract it into
 `~/.config/omarchy/plugins/local.omaclip.clipboard-sync/`, then run:
 
 ```sh
+~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/build
 ~/.config/omarchy/plugins/local.omaclip.clipboard-sync/bin/check-deps
 omarchy plugin validate ~/.config/omarchy/plugins/local.omaclip.clipboard-sync
 omarchy plugin enable local.omaclip.clipboard-sync

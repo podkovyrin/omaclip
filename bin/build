@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-cargo build --release --locked
-install -m 755 target/release/omaclip bin/omaclip-rs
+if ! command -v cargo >/dev/null 2>&1; then
+  echo 'Building OmaClip requires Rust 1.88+ and a C toolchain. Install with: omarchy pkg add rust base-devel' >&2
+  exit 1
+fi
+cargo build --release --locked --target-dir target
+# Replace atomically so rebuilding also works while the old executable is running.
+staged=$(mktemp bin/.omaclip-rs.XXXXXX)
+trap 'rm -f "$staged"' EXIT
+install -m 755 target/release/omaclip "$staged"
+mv -f "$staged" bin/omaclip-rs
+printf 'Built OmaClip. Enable the plugin, or restart its service from the panel.\n'

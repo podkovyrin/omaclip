@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1
+
+- Distribute source instead of a prebuilt executable. Build locally with
+  `bin/build` before enabling the plugin and after every update.
+- Package source archives with the locked Rust dependencies and build script.
+- Show a build instruction when the backend has not been compiled.
+
 ## 0.1.0
 
 First release.

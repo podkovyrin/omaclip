@@ -9,7 +9,7 @@ Item {
     property string adbPath: ""
     property bool active: true
     property var status: ({ state: "starting", message: "Starting clipboard bridge", devices: [], selected: "", enabled: false })
-    readonly property string executable: decodeURIComponent(Qt.resolvedUrl("bin/omaclip-rs").toString().replace(/^file:\/\//, ""))
+    readonly property string executable: decodeURIComponent(Qt.resolvedUrl("bin/omaclip").toString().replace(/^file:\/\//, ""))
 
     function send(value) {
         if (bridge.running) bridge.write(JSON.stringify(value) + "\n")

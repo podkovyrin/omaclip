@@ -12,7 +12,7 @@ if ((${#missing[@]})); then
 fi
 root=$(cd "$(dirname "$0")/.." && pwd)
 if [[ ! -x "$root/bin/omaclip-rs" ]]; then
-  echo 'Build OmaClip first: ./bin/build' >&2
+  printf 'Build OmaClip first: %s/bin/build\n' "$root" >&2
   exit 1
 fi
 "$root/bin/omaclip-rs" --verify-server
