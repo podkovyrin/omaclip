@@ -7,7 +7,7 @@ version=$(python3 -c 'import json; print(json.load(open("manifest.json"))["versi
 mkdir -p dist
 archive="dist/omaclip-${version}-source.tar.gz"
 tar -czf "$archive" manifest.json Panel.qml ClipboardView.qml BridgeBackend.qml Service.qml \
-  README.md LICENSE NOTICE CHANGELOG.md Cargo.toml Cargo.lock src tests \
+  README.md LICENSE NOTICE CHANGELOG.md preview.png Cargo.toml Cargo.lock src tests \
   bin/omaclip bin/build bin/package bin/check-deps bin/check-ui .gitignore
 (cd dist && sha256sum "$(basename "$archive")" > "$(basename "$archive").sha256")
 printf 'Created %s\n' "$archive"

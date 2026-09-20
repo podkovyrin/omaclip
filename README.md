@@ -4,7 +4,7 @@ OmaClip provides a seamless, reliable shared clipboard between Omarchy and one
 Android phone over USB or Wi-Fi. No mirroring window, video, or audio—just
 keyboard-first clipboard controls in the bar.
 
-![OmaClip panel showing active Wi-Fi clipboard sync](assets/omaclip-panel.png)
+![OmaClip panel showing active Wi-Fi clipboard sync](preview.png)
 
 ## Install
 
