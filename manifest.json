@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "local.omaclip.clipboard-sync",
   "name": "OmaClip Clipboard Sync",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "OmaClip contributors",
   "license": "MIT",
   "description": "Standalone, plain-text clipboard sharing with one selected Android phone over USB or paired Wi-Fi.",

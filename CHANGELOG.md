@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Place the screenshot at the repository root as `preview.png` so the marketplace
+  can display it, and include it in source archives.
+
 ## 0.1.1
 
 - Distribute source instead of a prebuilt executable. Build locally with
